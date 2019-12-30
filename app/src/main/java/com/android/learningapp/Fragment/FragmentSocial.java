@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.solver.widgets.ConstraintHorizontalLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.android.learningapp.R;
@@ -33,7 +35,7 @@ public class FragmentSocial extends Fragment implements View.OnClickListener {
     CallbackManager callbackManager;
     LoginButton btnFBLogin;
     CardView facebookLogin;
-
+    ConstraintLayout fb;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -73,7 +75,7 @@ public class FragmentSocial extends Fragment implements View.OnClickListener {
         facebookLogin = view.findViewById(R.id.fb_login);
         btnFBLogin = view.findViewById(R.id.fbbtn);
         weekly = view.findViewById(R.id.weekly);
-
+        fb=view.findViewById(R.id.fb);
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
         facebookLogin.setOnClickListener(this);
@@ -108,6 +110,14 @@ public class FragmentSocial extends Fragment implements View.OnClickListener {
         config.setDelay(500); // half second between each showcase view
         MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(getActivity(), "Social");
 
+        sequence.setConfig(config);
+        sequence.addSequenceItem(new MaterialShowcaseView.Builder(getActivity())
+                .setTarget(fb)
+                .setGravity(0)
+                .setDismissText("OK")
+                .setContentText("Facebook Login")
+                .withRectangleShape()
+                .build());
         sequence.setConfig(config);
         sequence.addSequenceItem(new MaterialShowcaseView.Builder(getActivity())
                 .setTarget(weekly)
