@@ -186,7 +186,7 @@ public class TabbedActivity extends AppCompatActivity implements View.OnClickLis
 
                 .setGravity(0)
                 .setDismissText("OK")
-                .setContentText("Click here to view your profile")
+                .setContentText("Tell us about yourself.")
                 .withRectangleShape()
                 .build());
         sequenceTask.addSequenceItem(new MaterialShowcaseView.Builder(this)
@@ -225,7 +225,10 @@ public class TabbedActivity extends AppCompatActivity implements View.OnClickLis
                 .setTarget(task)
                 .setGravity(0)
                 .setDismissText("OK")
-                .setContentText("Here you will find differnt tasks")
+                .setContentText("Our method of teaching is through exhaustive questioning. " +
+                        "Answer some simple intuition based questions and check your answers" +
+                        " side by side to develop a thinking procedure for writing programs and making circuits." +
+                        "The questions are only meant for learning and not for evaluation purpose.")
                 .withRectangleShape()
                 .build());
         sequence.start();
@@ -251,7 +254,8 @@ public class TabbedActivity extends AppCompatActivity implements View.OnClickLis
                 .setTarget(social)
                 .setGravity(0)
                 .setDismissText("OK")
-                .setContentText("Connect and Compete with your friends and learners from all over the world")
+                .setContentText("Connect to Facebook and share your progress with your friends." +
+                        " Ask questions and doubts from recognised experts.")
                 .withRectangleShape()
                 .build());
         sequence.start();
