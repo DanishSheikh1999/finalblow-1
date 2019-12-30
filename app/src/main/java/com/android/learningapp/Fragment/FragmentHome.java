@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
 
 public class FragmentHome extends Fragment implements View.OnClickListener {
     private TourGuide tourGuide;
+    private ScrollView sv;
     private CardView codingBasics, microControllers, sensors;
     private ViewPager viewPager;
     private CardViewAdapter adapter;
@@ -68,6 +70,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         codingBasics = view.findViewById(R.id.coding_basics);
+
         microControllers = view.findViewById(R.id.boards_basic);
         sensors = view.findViewById(R.id.sensors_basic);
         viewPager = view.findViewById(R.id.latest_gadgets_viewpager);
@@ -76,6 +79,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         codingBasics.setOnClickListener(this);
         microControllers.setOnClickListener(this);
         sensors.setOnClickListener(this);
+        sv=view.findViewById(R.id.scrollView);
         viewPager.setAdapter(adapter);
         return view;
     }
@@ -108,7 +112,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                 .withRectangleShape()
                 .setDelay(500)
                 .setDismissText("OK")
-                .setContentText("Explore the new")
+                .setContentText("Keep yourself updated about the latest innovations in the field of IOT. " +
+                        "Also get notified about various techfests," +
+                        " workshops and bootcamps going on around the country")
                 .build());
         sequence.addSequenceItem(new MaterialShowcaseView.Builder(getActivity())
                 .setTarget(viewPager)
@@ -124,7 +130,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                 .setGravity(0)
                 .setDelay(2000)
                 .setDismissText("OK")
-                .setContentText("Learn the basics of coding here")
+                .setContentText("Strengthen your knowledge about IOT programming." +
+                        " Answer to every problem you’ll face lies here. " +
+                        "Revert back to this module whenever you are stuck")
                 .withRectangleShape()
                 .build());
 
@@ -134,7 +142,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                 .setGravity(0)
                 .setDelay(500)
                 .setDismissText("OK")
-                .setContentText("Click here to know more about Microcontrollers.")
+                .setContentText("Know your basic Microcontrollers better and in depth .")
                 .withRectangleShape()
                 .build());
 
@@ -143,7 +151,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                 .setGravity(0)
                 .setDelay(500)
                 .setDismissText("OK")
-                .setContentText("Learn about the sensors that you will be working with.")
+                .setContentText("Find the thorough description of the sensors used in the task here.")
                 .withRectangleShape()
                 .build());
         sequence.start();
@@ -152,6 +160,10 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
             public void onDismiss(MaterialShowcaseView itemView, int position) {
                 if (position==0)
                     viewPager.setCurrentItem(1);
+                if(position==2)
+                    sv.smoothScrollBy(0,sv.getBottom());
+
+
                 if (position == 4) {
                     tourGuide.startTourTasks();
                 }
